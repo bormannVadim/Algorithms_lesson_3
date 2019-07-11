@@ -4,6 +4,7 @@ namespace Algorithms_Lesson_3
 {
 
     // Савенко В.
+    // Линейный поиск в виде рекурсии и пузырьковая сортировка
     class Program
     {
 
