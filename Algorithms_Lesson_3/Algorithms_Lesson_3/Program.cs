@@ -16,6 +16,13 @@ namespace Algorithms_Lesson_3
 
             string ElementFound = SearchEl(array, 2, 0) != -1 ? "Елемент найден!" :"Елемент не найден!";
             Console.WriteLine(ElementFound);
+
+            int[] array2 = FillArray(10);
+
+            Console.WriteLine("Колличество операций обычной сортировки: "+ BumbleSort(array).ToString());
+
+            Console.WriteLine("Колличество оптимизированной сортировки: " + BumbleSortOptimized(array2).ToString());
+
         }
 
 
@@ -35,8 +42,9 @@ namespace Algorithms_Lesson_3
         {
             for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + array[i]);
+                Console.Write(array[i]+", ");
             }
+            Console.Write("\n");
         }
 
         public static int SearchEl(int[] array,int el,int index)
@@ -57,6 +65,56 @@ namespace Algorithms_Lesson_3
             }
             else
                 return -1;
+        }
+
+        public static void Swap(ref int a , ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+
+        public static int BumbleSort(int[] array)
+        {
+            int taskCount = 0; 
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = 0; j < array.Length - 1; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        Swap(ref array[j], ref array[j + 1]);
+                    }
+                }
+                taskCount++;
+            }
+            return taskCount;
+        }
+
+        // ПУЗЫРЬКОВА СОРТИРОВКА ОПТИМИЗИРОВАННАЯ
+        // ОСНОВАННАЯ НА ТОМ, ЧТО ЕСЛИ МАССИВ СОРТИРОВАН НА БОЛЕЕ РАННИЪ ЦИКЛАХ, ТО НЕТ СМЫСЛА ВЫПОЛНЯТЬ ДОКОНЦА
+        public static int BumbleSortOptimized(int[] array)
+        {
+            int taskCount = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                bool isChanged = false;
+                for (int j = 0; j < array.Length - 1 - i; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        Swap(ref array[j], ref array[j + 1]);
+
+                        //Зафиксировали перестановку элементов
+                        isChanged = true;
+                    }
+                }
+                taskCount++;
+                //Если факт перестановки элементов не был зафиксирован
+                if (isChanged == false)
+                    break; //Прерываем цикл (прекращаем сортировку)
+            }
+            return taskCount;
         }
     }
 }
