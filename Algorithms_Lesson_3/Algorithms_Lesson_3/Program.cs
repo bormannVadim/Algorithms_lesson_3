@@ -19,7 +19,7 @@ namespace Algorithms_Lesson_3
         }
 
 
-        // Линейный поиск в виде рекурсии
+        // ЛИНЕЙНЫЙ ПОИСК В ВИДЕ РЕКУНСРИИ
         public static int[] FillArray(int size)
         {
             Random r1 = new Random();
@@ -51,7 +51,7 @@ namespace Algorithms_Lesson_3
                 {
                 
                     index++;
-                    return SearchEl(array, el, index++);
+                    return SearchEl(array, el, index);
                
                  }
             }
